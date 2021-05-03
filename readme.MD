@@ -6,19 +6,19 @@ SignUp Page:
 
 ---
 
-![Signup](https://i.ibb.co/XVRFf38/Screenshot-83.png)
+![Signup](https://res.cloudinary.com/test-cloud-by-kaush/image/upload/v1620016733/Screenshot_83_jbv9dh.png)
 
 Google Auth:
 
 ---
 
-![Google Auth](https://i.ibb.co/W0T1RDQ/Screenshot-84.png)
+![Google Auth](https://res.cloudinary.com/test-cloud-by-kaush/image/upload/v1620016740/Screenshot_84_pvt7ow.png)
 
 The question Bank:
 
 ---
 
-![mainpage](https://i.ibb.co/Y05kJSP/Screenshot-86.png)
+![mainpage](https://res.cloudinary.com/test-cloud-by-kaush/image/upload/v1620016740/Screenshot_86_rjn7af.png)
 
 
 ***
