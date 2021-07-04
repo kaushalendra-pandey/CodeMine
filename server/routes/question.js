@@ -7,9 +7,9 @@ const auth = require('../middleware/auth')
 // all the route here starts with /question
 // main page or landing page
 router.get('/',quest.getAllQues)
-router.post('/',quest.createQues)
-router.patch('/:id',quest.updateQues)
-router.delete('/:id',quest.deleteQues)
+router.post('/',auth,quest.createQues)
+router.patch('/:id',auth,quest.updateQues)
+router.delete('/:id',auth,quest.deleteQues)
 
 
 module.exports = router

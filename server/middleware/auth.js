@@ -2,20 +2,16 @@ const jwt = require('jsonwebtoken')
 
 const auth = async (req,res,next) => {
     try {
-       const token = req.header.authorzation.split(" ")(1)
-       const isCustomAuth = token.length < 500
-
-       let decodedData;
-       if(token && isCustomAuth){
-           decodeData:jwt.verify(token,`${process.env.SECRET}`)
-           req.userId = decodedData?.id
-       }else{
-           decodedData = jwt.decode(token)
-           req.userId = decodedData?.sub
+       const token = req?.headers?.authorization.split(" ")[1]
+       const isVerfied = jwt.verify(token,process.env.SECRET)
+       if (isVerfied){
+        console.log("in here")
+            next()
        }
-       next( )
+       
     } catch (error) {
         console.log(error)
+        res.status(400).json({message:"Not Authorized."})
     }
 }
 

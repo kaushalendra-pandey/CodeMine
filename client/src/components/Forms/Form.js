@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
+import swal from 'sweetalert2'
+import { useHistory } from 'react-router';
 
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
+
+  const history = useHistory()
+
   const [postData, setPostData] = useState({ title: '', source: '', link: '', solved: '',category:'' });
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
@@ -25,10 +30,61 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost(postData));
+
+      if(postData.title === "" || postData.solved === "" || postData.source === ""){
+        swal.fire({
+          title:"Please provide required details",
+          icon:"error"
+        })
+        return
+      }
+
+      dispatch(createPost(postData))
+      .then(data => {
+        if(data.error === "Yes"){
+          swal.fire({
+            title:"Please Login",
+            confirmButtonText:"Login",
+            icon:"error",
+          })
+          .then((result) => {
+            if(result.isConfirmed){
+              history.push("/auth")
+            }
+          })
+        } else {
+          swal.fire({
+            title:"Question Created successfuly",
+            icon:"success"
+          })
+        }
+      })
+      .catch((e)=> {
+        console.log(e)
+      })
+      
       clear();
     } else {
-      dispatch(updatePost(currentId, postData));
+      if(postData.title === "" || postData.solved === "" || postData.source === ""){
+        swal.fire({
+          title:"Please provide required details",
+          icon:"error"
+        })
+        return
+      }
+      dispatch(updatePost(currentId, postData))
+      .then(data=>{
+        if(data.error){
+          swal.fire({
+            title:"Cannot update",
+            confirmButtonText:"Ok",
+            icon:"error",
+          })
+        }
+      })
+      .catch((e)=>{
+        console.log(e)
+      })
       clear();
     }
   };
