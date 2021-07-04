@@ -28,13 +28,16 @@ const Auth = () => {
        e.preventDefault()
        if(isSignup){
         dispatch(signup(formData,history))
+
        }else{
         dispatch(signin(formData,history))
        }
+       history.push("/")
 
     }
 
     const handleChange = (e) =>{
+        console.log(e.target.name)
         setFormData({...formData,[e.target.name]:e.target.value})
     }
 
@@ -72,9 +75,9 @@ const Auth = () => {
                         {
                             isSignup &&(
                                 <>  
-                                    <Input name="firstName" label="First Name" handleChane={handleChange}
+                                    <Input name="firstName" label="First Name" handleChange={handleChange}
                                     autoFocus half/>
-                                    <Input name="lastName" label="Last Name" handleChane={handleChange}
+                                    <Input name="lastName" label="Last Name" handleChange={handleChange}
                                     autoFocus half/>
 
                                 </>
