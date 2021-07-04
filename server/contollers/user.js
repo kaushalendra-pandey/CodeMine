@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const User = require('../db/user')
 
 const signin = async(req,res) =>{
-    const [email,password] = req.body
+    const {email,password} = req.body
     try {
         const existingUser = await User.findOne({email})
         if(!existingUser){
@@ -26,7 +26,7 @@ const signin = async(req,res) =>{
 const signup = async(req,res) =>{
     const {email,password,firstName,lastName,confirmPassword} = req.body
     try {
-        const existingUser = await Use.findOne({email})
+        const existingUser = await User.findOne({email})
         if(existingUser) return res.status(400).json({message:"User already registered!!! Sign In"})
         
         if (password !== confirmPassword) return res.status(400).json({message:"Password didnt match!!"})
@@ -36,7 +36,7 @@ const signup = async(req,res) =>{
         const token = jwt.sign({email:result.email,id:result._id},"kaushalendraPandey",{expiresIn:"1h"})
         res.status(200).json({result,token})
     } catch (error) {
-        res.send(500).json({message:"Some Error occured!!"})
+        res.status(500).json({message:"Some Error occured!!"})
     }
 }
 
